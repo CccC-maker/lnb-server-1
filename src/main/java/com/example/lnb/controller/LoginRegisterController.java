@@ -16,10 +16,6 @@ public class LoginRegisterController {
     @Autowired
     private LoginRegisterrService userService;
 
-    @GetMapping
-    public String test1() {
-        return "ok";
-    }
 
     /**
      * 注册
