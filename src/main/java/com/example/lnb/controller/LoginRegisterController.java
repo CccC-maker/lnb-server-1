@@ -1,44 +1,42 @@
 package com.example.lnb.controller;
 
 import com.example.lnb.entity.Users;
-import com.example.lnb.entity.dto.Login_Register_DTO;
-import com.example.lnb.service.LoginRegisterrService;
+import com.example.lnb.controller.dto.Allusers_DTO;
+import com.example.lnb.service.UsersService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 
 @RestController
-public class LoginRegisterController {
+public class Users_Controller {
 
     @Autowired
-    private LoginRegisterrService userService;
-
-    @GetMapping
-    public String test1() {
-        return "ok";
-    }
+    private UsersService usersService;
 
     /**
      * 注册
-     * @param users
-     * @return
      */
-    @PostMapping("/register")
-    public Login_Register_DTO register(@RequestBody Users users){
-        return userService.register(users);
+    @PostMapping("/register/users")
+    public Allusers_DTO register(@RequestBody Users users){
+        return usersService.register(users);
     }
 
     /**
      * 登录
-     * @param users
-     * @return
      */
-    @PostMapping("/login")
-    public Login_Register_DTO login(@RequestBody Users users){
-        return userService.login(users);
+    @PostMapping("/login/users")
+    public Allusers_DTO login(@RequestBody Users users){
+        return usersService.login(users);
+    }
+
+    /**
+     * 修改密码
+     */
+    @PostMapping("/chpassword/users")
+    public Allusers_DTO chpassword(@RequestParam("username") String username,
+                                   @RequestParam("oldPassword") String oldPassword,
+                                   @RequestParam("newPassword") String newPassword) {
+        return usersService.chpassword(username, oldPassword, newPassword);
     }
 
 }
